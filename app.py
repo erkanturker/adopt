@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,render_template
 from models import Pet,connect_db,db
 
 app = Flask(__name__)
@@ -13,4 +13,5 @@ app.app_context().push()
 
 @app.route("/")
 def show_index():
-    return "Home page"
+    pets = Pet.query.all()
+    return render_template("list_pets.html",pets=pets)

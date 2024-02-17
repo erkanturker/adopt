@@ -21,6 +21,11 @@
   <body>
     <h1 class="display-1">Pets</h1>
     <div class="container">
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="alert alert-success" role="alert">
+        {% for message in messages %} {{ message }} {% endfor %}
+      </div>
+      {%endif%} {%endwith%}
       <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for pet in pets %}
         <div class="col">
@@ -42,6 +47,18 @@
                 </div>
               </div>
               <p class="card-text">{{pet.notes}}</p>
+              <p>
+                <a
+                  href="/pets/{{pet.id}}/edit"
+                  class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                  >Edit</a
+                >
+                <a
+                  href="/pets/{{pet.id}}/delete"
+                  class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover mx-2"
+                  >Delete</a
+                >
+              </p>
             </div>
           </div>
         </div>
